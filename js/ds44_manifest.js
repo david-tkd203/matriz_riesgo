@@ -8,10 +8,11 @@ window.DS44_MANIFEST = {
         desc: "Documento general y acceso a todas las secciones del Decreto Supremo N° 44.",
         files: [
         {
-            name: "DS 44 - 27-07-2024 - GESTIÓN PREVENTIVA.pdf",
-            path: "Decreto Supremo N° 44/DS 44 - 27-07-2024 - GESTIÓN PREVENTIVA.pdf",
-            desc: "Documento principal de referencia."
-        }
+            name: "Sistema de Gestión DS44 IST.potx",
+            // OJO: usa el nombre EXACTO del archivo en disco
+            path: "Decreto Supremo N° 44/Sistema_Gestión_DS44_IST.potx",
+            desc: "Plantilla PPT del Sistema de Gestión DS44."
+        },
         ],
         children: [
         "Decreto Supremo N° 44/1.1 Política SST",
@@ -29,7 +30,6 @@ window.DS44_MANIFEST = {
         "Decreto Supremo N° 44/1.6 Investigación Incidentes y EP",
         "Decreto Supremo N° 44/1.7 Gestión de EPP",
         "Decreto Supremo N° 44/1.8 Capacitación e informacion",
-        "Decreto Supremo N° 44/1.9  Gestión de riesgos y desastres"
         ]
     },
 

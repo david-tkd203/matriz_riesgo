@@ -88,3 +88,115 @@
     font-size: 12px;
     color: var(--muted);
 }
+
+/* ====== Lista de archivos (raíz DS44) ====== */
+.file-list {
+    list-style: none;
+    margin: 12px 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 12px;
+}
+
+.file-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    box-shadow: 0 1px 2px rgba(0,0,0,.04);
+}
+
+.file-item .ficon {
+    position: relative;
+    width: 38px;
+    height: 46px;
+    border-radius: 8px;
+    flex: none;
+    border: 1px solid #e5e7eb;
+    background: linear-gradient(#f3f4f6, #e5e7eb);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.6);
+}
+.file-item .ficon::before {
+  /* “oreja” de hoja */
+    content: "";
+    position: absolute;
+    right: 0; top: 0;
+    width: 14px; height: 14px;
+    background: rgba(255,255,255,.9);
+    border-left: 1px solid rgba(0,0,0,.06);
+    border-bottom: 1px solid rgba(0,0,0,.06);
+    border-top-right-radius: 8px;
+    transform: translate(1px, -1px) skewY(-12deg);
+}
+.file-item .ficon::after {
+    content: attr(data-ext);
+    position: absolute;
+    left: 6px; bottom: 4px;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: .04em;
+    opacity: .85;
+}
+
+/* Meta (título + descripción) */
+.file-item .meta { flex: 1; min-width: 0; }
+.file-item .title {
+    display: inline-block;
+    font-weight: 600;
+    color: #0b1b2a;
+    text-decoration: none;
+}
+.file-item .title:hover { text-decoration: underline; }
+.file-item .desc {
+    display: block;
+    margin-top: 2px;
+    font-size: 12px;
+    color: #6b7280;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Acción */
+.file-item .actions { margin-left: auto; }
+.file-item .btn-dl {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
+    border-radius: 10px;
+    border: 1px solid #d0d7de;
+    background: #ffffff;
+    font-size: 12px;
+    cursor: pointer;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: box-shadow .15s ease, transform .05s ease;
+}
+.file-item .btn-dl:hover { box-shadow: 0 2px 6px rgba(0,0,0,.08); }
+.file-item .btn-dl:active { transform: translateY(1px); }
+
+/* ====== Temas por extensión ====== */
+.ext-pdf .ficon {
+    background: linear-gradient(#fee2e2, #fecaca);
+    border-color: #fecaca;
+}
+.ext-pdf .ficon::after { content: "PDF"; color: #991b1b; }
+.ext-pdf .btn-dl { border-color:#fecaca; }
+
+.ext-potx .ficon {
+    background: linear-gradient(#dbeafe, #bfdbfe);
+    border-color: #bfdbfe;
+}
+.ext-potx .ficon::after { content: "POTX"; color: #1d4ed8; }
+.ext-potx .btn-dl { border-color:#bfdbfe; }
+
+/* Modo compacto en móviles muy chicos */
+@media (max-width: 420px) {
+    .file-item { padding: 10px 12px; }
+    .file-item .btn-dl { padding: 6px 10px; }
+}

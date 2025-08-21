@@ -101,5 +101,48 @@
     <footer class="footer">
         <div class="container"><small>DS 44 · Cencosud & IST</small></div>
     </footer>
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+    const root = window.DS44_MANIFEST && window.DS44_MANIFEST['DS44_Root'];
+    if (!root || !root.files || !root.files.length) return;
+
+    const esc = (s)=> String(s||'')
+        .replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+
+    const panel = document.createElement('section');
+    panel.className = 'panel';
+    panel.innerHTML = `
+        <h3 class="panel-title">Documentos generales</h3>
+        <ul class="file-list" id="ds44-root-files"></ul>
+    `;
+    const toc = document.getElementById('ds44-toc');
+    toc.parentNode.insertBefore(panel, toc);
+
+    const ul = panel.querySelector('#ds44-root-files');
+
+    root.files.forEach(f => {
+        const href = encodeURI(f.path);
+        const ext = (f.path.split('.').pop() || '').toLowerCase(); // pdf / potx, etc.
+        const li = document.createElement('li');
+        li.className = `file-item ext-${ext}`;
+
+        li.innerHTML = `
+        <span class="ficon" data-ext="${ext}" aria-hidden="true"></span>
+        <div class="meta">
+            <a class="title" href="${href}" download>${esc(f.name)}</a>
+            ${f.desc ? `<small class="desc">${esc(f.desc)}</small>` : ``}
+        </div>
+        <div class="actions">
+            <a class="btn-dl" href="${href}" download>
+            Descargar
+            </a>
+        </div>
+        `;
+        ul.appendChild(li);
+    });
+    });
+    </script>
+
+
 </body>
 </html>
