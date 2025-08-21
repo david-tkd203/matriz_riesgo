@@ -386,20 +386,30 @@
     function findNearestVR(startIdxHeaders, map){
         const rx = /valorizaci[oó]n.*riesgo/i;
         for (let i = startIdxHeaders; i < headersDR.length; i++) {
-          const k = headersDR[i];
-          if (rx.test(k)) return map[k] || '';
+            const k = headersDR[i];
+            if (rx.test(k)) return map[k] || '';
         }
         for (const [k,v] of Object.entries(map)) if (rx.test(k)) return v || '';
         return '';
     }
 
     function asBullets(text){
-        const t = (text || '').trim();
+        const t = (text || '').replace(/\r/g, '').trim();
         if (!t) return `<div class="rc-value">—</div>`;
-        const items = t.split(/\r?\n|;/).map(s=>s.trim()).filter(Boolean);
+
+        const items = t
+            .split(/\n|;/)                     // separa por salto de línea o ;
+            .map(s => s.trim())
+            // elimina viñetas o guiones que vengan escritos en el texto: •, ·, -, *, —, • (u2022), ● (u25CF)
+            .map(s => s.replace(/^[\s\u2022\u25CF•·\-\*\—–]+/, ''))
+            // elimina numeraciones tipo "1) ", "2. ", "(3) "
+            .map(s => s.replace(/^\(?\d+[\)\.\-]\s*/, ''))
+            .filter(Boolean);
+
         if (!items.length) return `<div class="rc-value">${esc(t)}</div>`;
-        return `<ul>${items.map(s=>`<li>${esc(s)}</li>`).join('')}</ul>`;
+        return `<ul class="clean-list">${items.map(s => `<li>${esc(s)}</li>`).join('')}</ul>`;
     }
+
 
     // === Lectura A1 ===
     function readCell(sheet, r0, c0){
