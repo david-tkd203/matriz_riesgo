@@ -200,7 +200,7 @@
             box-shadow:0 2px 6px rgba(0,0,0,.06); color:#0b1b2a; font-family: Inter, system-ui, Segoe UI, Roboto, Arial, sans-serif; }
           .rep-head{ display:flex; align-items:center; justify-content:space-between; gap:12px; 
             border-bottom:1px solid #e5e7eb; padding-bottom:14px; margin-bottom:14px; }
-          .rep-head .logo{ height:40px; width:auto; object-fit:contain; }
+          .rep-head .logo{ height:75px; width:auto; object-fit:contain; }
           .rep-title{ flex:1; text-align:center; font-size:22px; font-weight:800; letter-spacing:.04em; text-transform:uppercase; color:#007CC1; }
           .rep-sub{ text-align:center; color:#333; margin:8px 0 2px; font-size:14px; }
 
