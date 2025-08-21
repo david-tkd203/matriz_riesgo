@@ -15,10 +15,14 @@
 
     <!-- Vista de tarjetas D→R (aislada para no chocar con script.js) -->
     <script src="vista_previa.js" defer></script>
+
+    <!-- Descarga de imágenes (tarjeta / informe) -->
     <script src="descargar_imagenes.js" defer></script>
+
+    <!-- Navbar / mega-menú -->
     <script src="menu.js" defer></script>
 </head>
-    <body>
+<body>
 
     <!-- ======= BARRA DE MARCA (logos) ======= -->
     <header class="brandbar" role="banner">
@@ -37,212 +41,219 @@
         </div>
         </div>
     </header>
+
     <!-- ============== NAVBAR / ÍNDICE ============== -->
     <nav class="subnav" role="navigation" aria-label="Índice">
-    <div class="container subnav__inner">
+        <div class="container subnav__inner">
         <ul class="subnav__list">
-        <li class="subnav__item">
+            <li class="subnav__item">
             <a class="subnav__link" href="#matriz">Matriz de Riesgo</a>
-        </li>
+            </li>
 
-        <li class="subnav__item subnav__item--hasmenu">
-            <button class="subnav__link subnav__toggle" type="button"
-                    aria-haspopup="true" aria-expanded="false" aria-controls="menu-ds44">
-            Decreto Supremo N°44
-            <svg class="subnav__chev" width="12" height="12" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+            <!-- Ítem DS44 con link + botón de despliegue -->
+            <li class="subnav__item subnav__item--hasmenu">
+            <!-- Link directo a ds44.html -->
+            <a href="./ds44.html">Decreto Supremo N°44</a>
+
+            <!-- Botón para abrir/cerrar el mega menú -->
+            <button class="subnav__toggle" type="button"
+                    aria-haspopup="true" aria-expanded="false" aria-controls="menu-ds44"
+                    title="Abrir menú DS44">
+                <svg class="subnav__chev" width="12" height="12" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M7 10l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2"/>
+                </svg>
             </button>
 
             <!-- Mega menú -->
             <div id="menu-ds44" class="mega" hidden>
-            <div class="mega__scroll">
+                <div class="mega__scroll">
                 <!-- Árbol colapsable con <details> para accesibilidad -->
                 <details class="tree" open>
-                <summary>1.1 Política SST</summary>
-                <ul>
+                    <summary>1.1 Política SST</summary>
+                    <ul>
                     <li><a href="#">1.1.1 Modelo</a></li>
                     <li><a href="#">1.1.2. Política SST</a></li>
                     <li><a href="#">1.1.3 Registros de gestión</a></li>
-                </ul>
+                    </ul>
                 </details>
 
                 <details class="tree">
-                <summary>1.2 Organización de SST</summary>
-                <ul>
+                    <summary>1.2 Organización de SST</summary>
+                    <ul>
                     <li><a href="#">1.2.1 Modelo</a></li>
                     <li><a href="#">1.2.2 Organización de SST</a></li>
                     <li><a href="#">1.2.3 Registros de gestión</a></li>
-                </ul>
+                    </ul>
                 </details>
 
                 <details class="tree">
-                <summary>1.3 Autoevaluación SST</summary>
-                <ul>
+                    <summary>1.3 Autoevaluación SST</summary>
+                    <ul>
                     <li><a href="#">1.3.1 Modelo</a></li>
                     <li><a href="#">1.3.2 Evaluación legal SST</a></li>
                     <li><a href="#">1.3.3 Registros de gestión</a></li>
-                </ul>
+                    </ul>
                 </details>
 
                 <details class="tree">
-                <summary>1.4 Matriz IPER</summary>
-                <ul>
+                    <summary>1.4 Matriz IPER</summary>
+                    <ul>
                     <li><a href="#">1.4.1 Modelo</a></li>
                     <li><a href="#">1.4.2 Diagnóstico inicial SST</a></li>
                     <li><a href="#">1.4.3 Registros de gestión</a></li>
-                </ul>
+                    </ul>
                 </details>
 
                 <details class="tree">
-                <summary>1.5 Programa de Trabajo SST</summary>
-                <ul>
+                    <summary>1.5 Programa de Trabajo SST</summary>
+                    <ul>
                     <li><a href="#">1.5.1 Modelo</a></li>
                     <li><a href="#">1.5.2 Programa de Trabajo SST</a></li>
                     <li><a href="#">1.5.3 Registros de gestión</a></li>
-                </ul>
+                    </ul>
                 </details>
 
                 <details class="tree">
-                <summary>1.6 Investigación Incidentes y EP</summary>
-                <ul>
+                    <summary>1.6 Investigación Incidentes y EP</summary>
+                    <ul>
                     <li><a href="#">1.6.1 Modelo</a></li>
                     <li><a href="#">1.6.2 Investigación incidentes, accidentes y EP</a></li>
                     <li><a href="#">1.6.3 Registros de gestión</a></li>
-                </ul>
+                    </ul>
                 </details>
 
                 <details class="tree">
-                <summary>1.7 Gestión de EPP</summary>
-                <ul>
+                    <summary>1.7 Gestión de EPP</summary>
+                    <ul>
                     <li><a href="#">1.7.1 Modelo</a></li>
                     <li><a href="#">1.7.2 Gestión de EPP</a></li>
                     <li><a href="#">1.7.3 Registros de gestión</a></li>
-                </ul>
+                    </ul>
                 </details>
 
                 <details class="tree">
-                <summary>1.8 Capacitación e información</summary>
-                <ul>
+                    <summary>1.8 Capacitación e información</summary>
+                    <ul>
                     <li><a href="#">1.8.1 Modelo</a></li>
                     <li><a href="#">1.8.2 Información, formación, consulta, comunicación</a></li>
                     <li><a href="#">1.8.3 Registros de gestión</a></li>
-                </ul>
+                    </ul>
                 </details>
 
                 <details class="tree">
-                <summary>1.9 Gestión de riesgos y desastres</summary>
-                <ul>
+                    <summary>1.9 Gestión de riesgos y desastres</summary>
+                    <ul>
                     <li><a href="#">1.9.1 Modelo</a></li>
                     <li><a href="#">1.9.2 PGRD</a></li>
                     <li><a href="#">1.9.3 Registros de gestión</a></li>
-                </ul>
+                    </ul>
                 </details>
 
                 <details class="tree">
-                <summary>1.10 Gestión de CPHS</summary>
-                <ul>
+                    <summary>1.10 Gestión de CPHS</summary>
+                    <ul>
                     <li><a href="#">1.10.1 Modelo</a></li>
                     <li><a href="#">1.10.2 Gestión de CPHS</a></li>
                     <li><a href="#">1.10.3 Registros de gestión</a></li>
-                </ul>
+                    </ul>
                 </details>
 
                 <details class="tree">
-                <summary>1.11 Indicadores de gestión</summary>
-                <ul>
+                    <summary>1.11 Indicadores de gestión</summary>
+                    <ul>
                     <li><a href="#">1.11.1 Modelo</a></li>
                     <li>
-                    <details>
+                        <details>
                         <summary>1.11.2 Gestión de indicadores SST</summary>
                         <ul>
-                        <li><a href="#">Carpeta sin título</a></li>
+                            <li><a href="#">Carpeta sin título</a></li>
                         </ul>
-                    </details>
+                        </details>
                     </li>
                     <li><a href="#">1.11.3 Registros de gestión</a></li>
-                </ul>
+                    </ul>
                 </details>
 
                 <details class="tree">
-                <summary>1.12 Reglamento interno</summary>
-                <ul>
+                    <summary>1.12 Reglamento interno</summary>
+                    <ul>
                     <li><a href="#">1.12.1 Modelo</a></li>
                     <li><a href="#">1.12.2 Reglamento</a></li>
                     <li><a href="#">1.12.3 Registros de gestión</a></li>
-                </ul>
+                    </ul>
                 </details>
 
                 <details class="tree">
-                <summary>1.13 Mapa de riesgos</summary>
-                <ul>
+                    <summary>1.13 Mapa de riesgos</summary>
+                    <ul>
                     <li>
-                    <details open>
+                        <details open>
                         <summary>1.13.1 Modelo</summary>
                         <ul>
-                        <li><a href="#">Simbología mapas de riesgos 2025</a>
+                            <li><a href="#">Simbología mapas de riesgos 2025</a>
                             <ul class="tree__leaves">
-                            <li><a href="#">Músculo esquelético</a></li>
-                            <li><a href="#">Psicosocial</a></li>
-                            <li><a href="#">Riesgos Higiénicos</a>
+                                <li><a href="#">Músculo esquelético</a></li>
+                                <li><a href="#">Psicosocial</a></li>
+                                <li><a href="#">Riesgos Higiénicos</a>
                                 <ul>
-                                <li><a href="#">Amarillos</a></li>
-                                <li><a href="#">Naranjo</a></li>
-                                <li><a href="#">Rojo</a></li>
-                                <li><a href="#">Verde</a></li>
+                                    <li><a href="#">Amarillos</a></li>
+                                    <li><a href="#">Naranjo</a></li>
+                                    <li><a href="#">Rojo</a></li>
+                                    <li><a href="#">Verde</a></li>
                                 </ul>
-                            </li>
-                            <li><a href="#">Riesgos Seguridad</a>
+                                </li>
+                                <li><a href="#">Riesgos Seguridad</a>
                                 <ul>
-                                <li><a href="#">Amarillo</a></li>
-                                <li><a href="#">Naranjo</a></li>
-                                <li><a href="#">Rojo</a></li>
-                                <li><a href="#">Verde</a></li>
+                                    <li><a href="#">Amarillo</a></li>
+                                    <li><a href="#">Naranjo</a></li>
+                                    <li><a href="#">Rojo</a></li>
+                                    <li><a href="#">Verde</a></li>
                                 </ul>
-                            </li>
+                                </li>
                             </ul>
-                        </li>
+                            </li>
                         </ul>
-                    </details>
+                        </details>
                     </li>
                     <li><a href="#">1.13.2 Mapa de riesgos</a></li>
                     <li><a href="#">1.13.3 Registros de gestión</a></li>
-                </ul>
+                    </ul>
                 </details>
 
                 <details class="tree">
-                <summary>1.14 Delegado</summary>
-                <ul>
+                    <summary>1.14 Delegado</summary>
+                    <ul>
                     <li><a href="#">1.14.1 Modelo</a></li>
                     <li><a href="#">1.14.2 Delegado</a></li>
                     <li><a href="#">1.14.3 Registros</a></li>
-                </ul>
+                    </ul>
                 </details>
 
                 <details class="tree">
-                <summary>1.15 Encargado</summary>
-                <ul>
+                    <summary>1.15 Encargado</summary>
+                    <ul>
                     <li><a href="#">1.15.1 Modelo</a></li>
                     <li><a href="#">1.15.2 Encargado</a></li>
                     <li><a href="#">1.15.3 Registro</a></li>
-                </ul>
+                    </ul>
                 </details>
 
                 <details class="tree">
-                <summary>1.16 Seguimiento y mejoramiento</summary>
-                <ul>
+                    <summary>1.16 Seguimiento y mejoramiento</summary>
+                    <ul>
                     <li><a href="#">1.16.1 Modelo</a></li>
                     <li><a href="#">1.16.2 Seguimiento y mejoramiento SST</a></li>
                     <li><a href="#">1.16.3 Registros de gestión</a></li>
-                </ul>
+                    </ul>
                 </details>
+                </div>
             </div>
-            </div>
-        </li>
+            </li>
         </ul>
-    </div>
+        </div>
     </nav>
 
-    <main class="container">
-
+    <main class="container" id="matriz">
         <section class="panel">
         <div class="filters">
             <label class="field" for="vp-filter-input">
@@ -275,7 +286,7 @@
             </select>
             </label>
 
-            <!-- NUEVO: filtro de Riesgos -->
+            <!-- Filtro de Riesgos -->
             <label class="field" for="vp-risk-filter">
             <span>Riesgos</span>
             <select id="vp-risk-filter" disabled>
@@ -298,5 +309,6 @@
         <small>Funciona con SheetJS · Tabla + Tarjetas · Lectura por A1 (encabezados fila 10/11, datos desde fila 12).</small>
         </div>
     </footer>
+
 </body>
 </html>

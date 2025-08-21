@@ -403,3 +403,50 @@ body{
     .subnav__link, .subnav__toggle { padding:8px 12px; }
     .mega { width: calc(100vw - 16px); left: 8px; }
 }
+.subnav__item--hasmenu {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+.subnav__item--hasmenu > a {
+    text-decoration: none;
+}
+.subnav__toggle {
+    background: none;
+    border: 0;
+    padding: 6px;
+    cursor: pointer;
+    line-height: 1;
+}
+/* === Navbar: forzar color de enlaces en todos los estados === */
+.subnav__link,
+.subnav__item--hasmenu > a {
+    color: var(--cenco-blue);
+    text-decoration: none;
+}
+
+.subnav__link:hover,
+.subnav__item--hasmenu > a:hover {
+    color: var(--cenco-blue-2);
+}
+
+.subnav__link:visited,
+.subnav__item--hasmenu > a:visited {
+    color: var(--cenco-blue); /* evita morado de :visited */
+}
+
+.subnav__link:active,
+.subnav__item--hasmenu > a:active {
+    color: var(--cenco-blue-2);
+}
+
+.subnav__link:focus-visible,
+.subnav__item--hasmenu > a:focus-visible {
+    outline: 2px solid var(--cenco-blue-2);
+    outline-offset: 2px;
+    border-radius: 6px;
+}
+.subnav__link,
+.subnav__item--hasmenu > a {
+    font-weight: 700; /* negritas */
+}

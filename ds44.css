@@ -1,0 +1,90 @@
+/* ===== DS44 — estilos específicos (usa variables de style.css) ===== */
+
+.ds-hero {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+}
+
+.ds-lead {
+    font-size: 15px;
+    line-height: 1.6;
+    margin: 8px 0 0;
+}
+
+/* Grilla de “tarjetas de sección” */
+.toc-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 14px;
+}
+
+/* Cada bloque de capítulo (p. ej., 1.1, 1.2, ...) */
+.toc-section {
+    grid-column: span 12;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 14px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+@media (min-width: 900px) {
+    .toc-section { grid-column: span 6; }
+}
+
+.toc-section h4 {
+    margin: 0 0 10px;
+    font-size: 16px;
+}
+
+/* Lista de subítems */
+.toc-list {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 6px;
+}
+
+/* Enlaces con icono de carpeta */
+.folder-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 10px;
+    border-radius: 10px;
+    text-decoration: none;
+    color: var(--text);
+    background: var(--pill);
+    border: 1px solid var(--border);
+    transition: transform 0.06s ease, background 0.15s ease, border 0.15s ease;
+}
+.folder-link:hover,
+.folder-link:focus {
+    background: var(--pill-hover);
+    border-color: color-mix(in oklab, var(--accent) 45%, var(--border));
+    transform: translateY(-1px);
+    outline: none;
+}
+
+/* Icono carpeta */
+.folder-icon {
+    width: 18px;
+    height: 18px;
+    flex: 0 0 18px;
+    display: inline-block;
+}
+
+/* Estado activo (opcional) */
+.subnav__link.is-active {
+    font-weight: 700;
+    text-decoration: underline;
+}
+
+/* Subtexto en cada link (si se usa) */
+.folder-desc {
+    display: block;
+    font-size: 12px;
+    color: var(--muted);
+}

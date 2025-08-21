@@ -17,6 +17,20 @@
         .file-cta .btn { white-space: nowrap; }
         .crumbs a { color: var(--accent); text-decoration: none; }
         .crumbs a:hover{ text-decoration: underline; }
+        .subgrid { display:grid; gap:8px; grid-template-columns: repeat(12,1fr); }
+        .folder-chip{
+        grid-column: span 12;
+        display:flex; align-items:center; gap:8px;
+        padding:10px 12px; border-radius:10px;
+        background: var(--pill); border:1px solid var(--border);
+        text-decoration:none; color:var(--text);
+        }
+        @media (min-width: 900px) { .folder-chip { grid-column: span 6; } }
+        .folder-icon{ width:18px; height:18px; }
+        .ext-badge{
+        display:inline-block; font-size:12px; padding:3px 6px; border-radius:6px;
+        border:1px solid var(--border); background:#fff; margin-left:6px;
+        }
     </style>
     </head>
     <body>
@@ -55,6 +69,10 @@
         <p id="page-desc" class="muted"></p>
         <p id="page-note" class="small" style="display:none"></p>
 
+        <!-- Subcarpetas (si existen) -->
+        <div id="folder-list" class="subgrid" style="margin:12px 0;"></div>
+
+        <!-- Archivos -->
         <div id="file-list" class="file-list"></div>
         </section>
     </main>
@@ -64,6 +82,11 @@
     </footer>
 
     <script src="menu.js" defer></script>
+
+    <!-- Manifiesto con la estructura de carpetas/archivos -->
+    <script src="ds44_manifest.js" defer></script>
+
+    <!-- Lógica de render -->
     <script src="file_view.js" defer></script>
 </body>
 </html>
