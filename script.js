@@ -44,7 +44,17 @@ function localeCmp(a, b) {
 }
 
 // === Inicio ===
-init();
+// SOLO corre si existe la UI de tabla:
+if (
+    document.getElementById('filter-input') &&
+    document.getElementById('sheets') &&
+    document.getElementById('preview')
+    ) {
+    init();
+    } else {
+    console.info('[script.js] UI de tabla no está en este index; omito init().');
+}
+
 
 async function init() {
     try {
