@@ -450,3 +450,66 @@ body{
 .subnav__item--hasmenu > a {
     font-weight: 700; /* negritas */
 }
+
+
+/* ===== Botones de descarga dentro de cada tarjeta ===== */
+.risk-card { position: relative; }
+
+/* Contenedor de acciones */
+.risk-card .dl-actions{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    margin-top:10px;
+    padding-top:10px;
+    border-top:1px dashed #c9e3f3;
+}
+
+/* Botón base */
+.risk-card .dl-card-btn,
+.risk-card .dl-report-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    margin-top:0;
+    align-self:flex-start;
+
+    padding:10px 14px;
+    border-radius:12px;
+    font-weight:700;
+    font-size:14px;
+    line-height:1;
+    border:1px solid transparent;
+    box-shadow:0 3px 0 rgba(0,0,0,.08);
+    cursor:pointer;
+    text-decoration:none;
+    color:#fff;
+    background: var(--accent);
+    transition: transform .06s ease, filter .15s ease, box-shadow .15s ease, background .15s ease;
+}
+
+/* Variante informe (naranja) */
+.risk-card .dl-report-btn{
+    background: var(--accent-2);
+}
+
+/* Hover/active */
+.risk-card .dl-card-btn:hover{ background: var(--cenco-blue-2); transform: translateY(-1px); }
+.risk-card .dl-report-btn:hover{ filter: brightness(0.95); transform: translateY(-1px); }
+.risk-card .dl-card-btn:active,
+.risk-card .dl-report-btn:active{ transform: translateY(0); box-shadow:0 1px 0 rgba(0,0,0,.12); }
+
+/* Foco accesible */
+.risk-card .dl-card-btn:focus-visible,
+.risk-card .dl-report-btn:focus-visible{
+    outline: 3px solid rgba(0,124,193,.25);
+    outline-offset: 2px;
+}
+
+/* Iconitos */
+.risk-card .dl-card-btn::before{ content: "⬇️"; font-size:16px; }
+.risk-card .dl-report-btn::before{ content: "📄"; font-size:16px; }
+
+/* Evitar morado visitado en <a> */
+.risk-card .dl-card-btn:visited,
+.risk-card .dl-report-btn:visited{ color:#fff; }

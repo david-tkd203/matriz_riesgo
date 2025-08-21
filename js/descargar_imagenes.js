@@ -107,34 +107,55 @@
         $cards.querySelectorAll('.risk-card').forEach((card, i) => {
             if (!card.style.position) card.style.position = 'relative';
 
-            if (!card.querySelector('.dl-card-btn.card')) {
-                const b1 = document.createElement('button');
-                b1.type = 'button';
-                b1.className = 'dl-card-btn card';
-                b1.textContent = 'Descargar tarjeta';
-                styleSmallBtn(b1);
-                b1.style.right = '10px';
-                b1.addEventListener('click', async (e) => {
-                    e.stopPropagation();
-                    await ensureHtml2Canvas();
-                    await downloadCard(card, makeFilename(card, i + 1, 'tarjeta'), 'card');
-                });
-                card.appendChild(b1);
+            // Crear contenedor .dl-actions si no existe
+            let actions = card.querySelector('.dl-actions');
+            if (!actions) {
+            actions = document.createElement('div');
+            actions.className = 'dl-actions';
+            card.appendChild(actions);
             }
 
-            if (!card.querySelector('.dl-card-btn.report')) {
-                const b2 = document.createElement('button');
-                b2.type = 'button';
-                b2.className = 'dl-card-btn report';
-                b2.textContent = 'Descargar informe';
-                styleSmallBtn(b2);
-                b2.style.right = '150px';
-                b2.addEventListener('click', async (e) => {
-                    e.stopPropagation();
-                    await ensureHtml2Canvas();
-                    await downloadCard(card, makeFilename(card, i + 1, 'informe'), 'informe');
-                });
-                card.appendChild(b2);
+            // Migrar botones viejos (absolutos) si existen
+            card.querySelectorAll('button.dl-card-btn, button.dl-card-btn.card, button.dl-card-btn.report')
+            .forEach(btn => {
+                // Quitar estilos inline heredados (position absolute, etc.)
+                btn.removeAttribute('style');
+                // Normalizar clases
+                if (btn.classList.contains('report')) {
+                btn.className = 'dl-report-btn';
+                } else {
+                btn.className = 'dl-card-btn';
+                }
+                // Mover al contenedor
+                actions.appendChild(btn);
+            });
+
+            // Crear botón "Descargar tarjeta" si falta
+            if (!actions.querySelector('.dl-card-btn')) {
+            const b1 = document.createElement('button');
+            b1.type = 'button';
+            b1.className = 'dl-card-btn';
+            b1.textContent = 'Descargar tarjeta';
+            b1.addEventListener('click', async (e) => {
+                e.stopPropagation();
+                await ensureHtml2Canvas();
+                await downloadCard(card, makeFilename(card, i + 1, 'tarjeta'), 'card');
+            });
+            actions.appendChild(b1);
+            }
+
+            // Crear botón "Descargar informe" si falta
+            if (!actions.querySelector('.dl-report-btn')) {
+            const b2 = document.createElement('button');
+            b2.type = 'button';
+            b2.className = 'dl-report-btn';
+            b2.textContent = 'Descargar informe';
+            b2.addEventListener('click', async (e) => {
+                e.stopPropagation();
+                await ensureHtml2Canvas();
+                await downloadCard(card, makeFilename(card, i + 1, 'informe'), 'informe');
+            });
+            actions.appendChild(b2);
             }
         });
     }
@@ -391,21 +412,29 @@
                 ignoreElements: el => {
                     const id = el.id || '';
                     const cls = el.classList ? Array.from(el.classList) : [];
-                    return id === 'dl-all-cards' || id === 'dl-all-report' || cls.includes('dl-card-btn');
+                    return (
+                        id === 'dl-all-cards' ||
+                        id === 'dl-all-report' ||
+                        id === 'dl-toolbar' ||
+                        cls.includes('dl-actions') ||
+                        cls.includes('dl-card-btn') ||
+                        cls.includes('dl-report-btn')
+                    );
                 },
+
                 onclone: (doc) => {
                     const style = doc.createElement('style');
                     style.textContent = `
-                        #dl-all-cards, #dl-all-report, .dl-card-btn { display:none !important; }
+                        #dl-toolbar, .dl-actions, .dl-card-btn, .dl-report-btn { display:none !important; }
                         .card-brandbar {
-                          display:flex; align-items:center; justify-content:space-between; gap:12px;
-                          padding:8px 10px; background:#ffffff; border:1px solid #e5e7eb;
-                          border-radius:12px; box-shadow:0 1px 2px rgba(0,0,0,.04); margin-bottom:10px;
+                            display:flex; align-items:center; justify-content:space-between; gap:12px;
+                            padding:8px 10px; background:#ffffff; border:1px solid #e5e7eb;
+                            border-radius:12px; box-shadow:0 1px 2px rgba(0,0,0,.04); margin-bottom:10px;
                         }
                         .card-brandbar .brand-mini { height:28px; width:auto; max-width:120px; object-fit:contain; }
                         .card-brandbar .brand-title {
-                          flex:1; text-align:center; font-size:14px; font-weight:700; letter-spacing:.06em;
-                          text-transform:uppercase; color:#007CC1; padding:0 8px; word-break:break-word;
+                            flex:1; text-align:center; font-size:14px; font-weight:700; letter-spacing:.06em;
+                            text-transform:uppercase; color:#007CC1; padding:0 8px; word-break:break-word;
                         }
                     `;
                     doc.head.appendChild(style);
@@ -417,9 +446,9 @@
                         const brandbar = doc.createElement('div');
                         brandbar.className = 'card-brandbar';
                         brandbar.innerHTML = `
-                          <img src="${LOGO_CENCO}" alt="Cencosud" class="brand-mini" />
-                          <div class="brand-title">RIESGO PROCESO ${procesoText || '—'}</div>
-                          <img src="${LOGO_IST}" alt="IST" class="brand-mini" />
+                            <img src="${LOGO_CENCO}" alt="Cencosud" class="brand-mini" />
+                            <div class="brand-title">RIESGO PROCESO ${procesoText || '—'}</div>
+                            <img src="${LOGO_IST}" alt="IST" class="brand-mini" />
                         `;
                         clonedCard.insertBefore(brandbar, clonedCard.firstChild);
                     } else {

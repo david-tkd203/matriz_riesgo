@@ -156,8 +156,8 @@
 
             const map = {};
             for (let c = COL_START; c <= Math.min(COL_END, lastCol); c++) {
-              const label = headersDR[c - COL_START];
-              map[label] = readCell(sh, r, c);
+                const label = headersDR[c - COL_START];
+                map[label] = readCell(sh, r, c);
             }
 
             const risk = findRisk(map); // <- texto de la columna "Riesgos"
@@ -234,16 +234,16 @@
         const selR = $riskSel.value || '__ALL__';   // <- NUEVO
 
         const filtered = rowsData.filter(o => {
-          const okP = (selP === '__ALL__') || (o.proc === selP);
-          const okA = (selA === '__ALL__') || (o.act === selA);
-          const okR = (selR === '__ALL__') || (o.risk === selR); // exact match
-          return okP && okA && okR;
+            const okP = (selP === '__ALL__') || (o.proc === selP);
+            const okA = (selA === '__ALL__') || (o.act === selA);
+            const okR = (selR === '__ALL__') || (o.risk === selR); // exact match
+            return okP && okA && okR;
         });
 
         $cards.innerHTML = '';
         if (!filtered.length) {
-          $cards.innerHTML = '<div class="muted">No hay resultados con los filtros actuales.</div>';
-          return;
+            $cards.innerHTML = '<div class="muted">No hay resultados con los filtros actuales.</div>';
+            return;
         }
 
         const frag = document.createDocumentFragment();
@@ -255,8 +255,8 @@
         const { proc, act, map } = row;
 
         const get = (rx) => {
-        for (const [k,v] of Object.entries(map)) if (rx.test(k)) return v || '';
-        return '';
+            for (const [k,v] of Object.entries(map)) if (rx.test(k)) return v || '';
+            return '';
         };
         const getExact = (k) => (map[k] !== undefined ? map[k] : '');
 
@@ -269,20 +269,20 @@
         // Probabilidades y VR
         const groups = [];
         headersDR.forEach((lab, i) => {
-        const m = lab.match(/^Probabilidad #(\d+)\s*\((P|C)\)$/i);
-        if (m) {
+            const m = lab.match(/^Probabilidad #(\d+)\s*\((P|C)\)$/i);
+            if (m) {
             const idx = Number(m[1]);
             const P = getExact(`Probabilidad #${idx} (P)`);
             const C = getExact(`Probabilidad #${idx} (C)`);
             const vr = findNearestVR(i+1, map);
             if (!groups.find(g => g.idx === idx)) groups.push({ idx, p: P || '', c: C || '', vr });
-        }
+            }
         });
         if (!groups.length){
-        const p = get(/\(p\)\s*$/i);
-        const c = get(/\(c\)\s*$/i);
-        const vr= get(/valorizaci[oó]n.*riesgo/i);
-        if (p || c || vr) groups.push({ idx: 1, p, c, vr });
+            const p = get(/\(p\)\s*$/i);
+            const c = get(/\(c\)\s*$/i);
+            const vr= get(/valorizaci[oó]n.*riesgo/i);
+            if (p || c || vr) groups.push({ idx: 1, p, c, vr });
         }
 
         const actRutinaria   = truthy(getExact('Actividad Rutinaria'));
@@ -293,56 +293,65 @@
         const card = document.createElement('article');
         card.className = 'risk-card';
 
+        // === TITULAR DE LA TARJETA: Proceso ===
+        const header = document.createElement('div');
+        header.className = 'card-brandbar';
+        header.innerHTML = `
+            <img class="brand-mini" src="static/img/logo_cencosud.png" alt="Cencosud" />
+            <div class="brand-title">Proceso: ${esc(proc || '—')}</div>
+            <img class="brand-mini" src="static/img/logo_ist.png" alt="IST" />
+        `;
+        card.appendChild(header);
+
+        // Zona de chips (sin el chip de Proceso para no duplicar)
         const top = document.createElement('div');
         top.className = 'rc-top';
         top.innerHTML = `
-        <span class="chip chip-proc">Proceso: ${esc(proc || '—')}</span>
-        <span class="chip chip-act">Actividad/Infra.: ${esc(act || '—')}</span>
-        ${actRutinaria   ? `<span class="chip chip-flag">Rutinaria</span>` : ''}
-        ${actNoRutinaria ? `<span class="chip chip-flag">No rutinaria</span>` : ''}
-        ${personalInt    ? `<span class="chip chip-person">Personal interno</span>` : ''}
-        ${personalExt    ? `<span class="chip chip-person">Personal externo</span>` : ''}
+            <span class="chip chip-act">Actividad/Infra.: ${esc(act || '—')}</span>
+            ${actRutinaria   ? `<span class="chip chip-flag">Rutinaria</span>` : ''}
+            ${actNoRutinaria ? `<span class="chip chip-flag">No rutinaria</span>` : ''}
+            ${personalInt    ? `<span class="chip chip-person">Personal interno</span>` : ''}
+            ${personalExt    ? `<span class="chip chip-person">Personal externo</span>` : ''}
         `;
         card.appendChild(top);
 
         const pr = document.createElement('div');
         pr.className = 'rc-section';
         pr.innerHTML = `
-        <div class="rc-grid">
+            <div class="rc-grid">
             <div><div class="rc-title">Peligros</div><div class="rc-value">${esc(peligros || '—')}</div></div>
             <div><div class="rc-title">Riesgos</div><div class="rc-value">${esc(riesgos || '—')}</div></div>
-        </div>`;
+            </div>`;
         card.appendChild(pr);
 
         if (groups.length) {
-        const metrics = document.createElement('div');
-        metrics.className = 'metrics';
-        groups.sort((a,b)=>a.idx-b.idx).forEach(g => {
+            const metrics = document.createElement('div');
+            metrics.className = 'metrics';
+            groups.sort((a,b)=>a.idx-b.idx).forEach(g => {
             const m = document.createElement('div');
             m.className = 'metric';
             const title = (g.idx === 1) ? 'Valorización del Riesgo' : 'Revalorización del Riesgo';
 
-            // Normalizar números y calcular VR si falta
             const pNum = toNumber(g.p);
             const cNum = toNumber(g.c);
             let vrNum  = toNumber(g.vr);
             if (!Number.isFinite(vrNum) && Number.isFinite(pNum) && Number.isFinite(cNum)) {
-              vrNum = pNum * cNum;
+                vrNum = pNum * cNum;
             }
 
-            const { cls, label } = riskCategory(vrNum); // cls = score--low|medium|high
+            const { cls, label } = riskCategory(vrNum);
             const vrText = Number.isFinite(vrNum) ? String(vrNum) : (g.vr || '—');
 
             m.innerHTML = `
-            <h4>${title}</h4>
-            <div class="badges">
+                <h4>${title}</h4>
+                <div class="badges">
                 <span class="badge">P: ${esc(g.p || '—')}</span>
                 <span class="badge">C: ${esc(g.c || '—')}</span>
-            </div>
-            <span class="score ${cls}">VR: ${esc(vrText)} ${label ? '— ' + label : ''}</span>`;
+                </div>
+                <span class="score ${cls}">VR: ${esc(vrText)} ${label ? '— ' + label : ''}</span>`;
             metrics.appendChild(m);
-        });
-        card.appendChild(metrics);
+            });
+            card.appendChild(metrics);
         }
 
         const controls = document.createElement('div');
@@ -353,19 +362,18 @@
         const foot = document.createElement('div');
         foot.className = 'rc-top';
         foot.innerHTML = `
-        <span class="chip">Responsabilidad: ${esc(responsabilidad || '—')}</span>
-        <span class="chip">Frecuencia: ${esc(frecuencia || '—')}</span>`;
+            <span class="chip">Responsabilidad: ${esc(responsabilidad || '—')}</span>
+            <span class="chip">Frecuencia: ${esc(frecuencia || '—')}</span>`;
         card.appendChild(foot);
 
         return card;
     }
-
     // Encontrar el texto de "Riesgos" en el mapa de columnas D→R
     function findRisk(map){
-      for (const [k,v] of Object.entries(map)){
-        if (/riesgos?$/i.test(k)) return String(v || '').trim();
-      }
-      return '';
+        for (const [k,v] of Object.entries(map)){
+            if (/riesgos?$/i.test(k)) return String(v || '').trim();
+        }
+        return '';
     }
 
     function riskCategory(vrNum){
@@ -429,11 +437,11 @@
         // actividades
         let acts;
         if (sel === '__ALL__') {
-          acts = allAct.slice();
+            acts = allAct.slice();
         } else {
-          const set = new Set();
-          rowsData.forEach(o => { if (o.proc === sel && o.act) set.add(o.act); });
-          acts = Array.from(set).sort((a,b)=>String(a).localeCompare(String(b),'es',{sensitivity:'base'}));
+            const set = new Set();
+            rowsData.forEach(o => { if (o.proc === sel && o.act) set.add(o.act); });
+            acts = Array.from(set).sort((a,b)=>String(a).localeCompare(String(b),'es',{sensitivity:'base'}));
         }
         const prevA = $actSel.value;
         fillSelect($actSel, acts, '— Todas —');
@@ -455,9 +463,9 @@
         const selA = $actSel.value  || '__ALL__';
         const set = new Set();
         rowsData.forEach(o => {
-          const okP = (selP === '__ALL__') || (o.proc === selP);
-          const okA = (selA === '__ALL__') || (o.act === selA);
-          if (okP && okA && o.risk) set.add(o.risk);
+            const okP = (selP === '__ALL__') || (o.proc === selP);
+            const okA = (selA === '__ALL__') || (o.act === selA);
+            if (okP && okA && o.risk) set.add(o.risk);
         });
         const risks = Array.from(set).sort((a,b)=>String(a).localeCompare(String(b),'es',{sensitivity:'base'}));
         const prevR = $riskSel.value;
