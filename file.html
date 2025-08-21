@@ -6,6 +6,15 @@
     <title>Decreto Supremo N°44 — Archivos</title>
     <link rel="stylesheet" href="style.css" />
     <style>
+        .folder-list { display:flex; flex-wrap:wrap; gap:8px; margin:8px 0 16px; }
+        .folder-chip{
+        display:inline-flex; align-items:center; gap:8px;
+        background: var(--panel); border:1px solid var(--border);
+        border-radius:999px; padding:8px 12px; text-decoration:none; color:var(--text);
+        }
+        .folder-chip:hover{ border-color: var(--accent); }
+        .folder-icon{ width:22px; height:22px; }
+
         .file-list { display:grid; gap: 10px; }
         .file-card{
         display:flex; align-items:flex-start; justify-content:space-between; gap:12px;
@@ -17,25 +26,13 @@
         .file-cta .btn { white-space: nowrap; }
         .crumbs a { color: var(--accent); text-decoration: none; }
         .crumbs a:hover{ text-decoration: underline; }
-        .subgrid { display:grid; gap:8px; grid-template-columns: repeat(12,1fr); }
-        .folder-chip{
-        grid-column: span 12;
-        display:flex; align-items:center; gap:8px;
-        padding:10px 12px; border-radius:10px;
-        background: var(--pill); border:1px solid var(--border);
-        text-decoration:none; color:var(--text);
-        }
-        @media (min-width: 900px) { .folder-chip { grid-column: span 6; } }
-        .folder-icon{ width:18px; height:18px; }
         .ext-badge{
-        display:inline-block; font-size:12px; padding:3px 6px; border-radius:6px;
-        border:1px solid var(--border); background:#fff; margin-left:6px;
+        font-size: 11px; border:1px solid var(--border); padding:2px 6px; border-radius:999px;
+        margin-left: 6px; color: var(--muted);
         }
     </style>
     </head>
     <body>
-
-    <!-- ======= BARRA DE MARCA ======= -->
     <header class="brandbar" role="banner">
         <div class="brandbar__inner container">
         <div class="brandbar__left">
@@ -51,7 +48,6 @@
         </div>
     </header>
 
-    <!-- ======= NAVBAR SUPERIOR (volver al índice) ======= -->
     <nav class="subnav" aria-label="Navegación secundaria">
         <div class="container">
         <ul class="toc">
@@ -60,7 +56,6 @@
         </div>
     </nav>
 
-    <!-- ======= CONTENIDO ======= -->
     <main class="container">
         <section class="panel">
         <h2 class="panel-title" id="section-title">Decreto Supremo N°44 — Documentos</h2>
@@ -69,8 +64,8 @@
         <p id="page-desc" class="muted"></p>
         <p id="page-note" class="small" style="display:none"></p>
 
-        <!-- Subcarpetas (si existen) -->
-        <div id="folder-list" class="subgrid" style="margin:12px 0;"></div>
+        <!-- NUEVO: lista de subcarpetas -->
+        <div id="folder-list" class="folder-list"></div>
 
         <!-- Archivos -->
         <div id="file-list" class="file-list"></div>
@@ -82,11 +77,8 @@
     </footer>
 
     <script src="menu.js" defer></script>
-
-    <!-- Manifiesto con la estructura de carpetas/archivos -->
+    <!-- IMPORTANTE: el manifiesto debe cargarse antes del visor -->
     <script src="ds44_manifest.js" defer></script>
-
-    <!-- Lógica de render -->
     <script src="file_view.js" defer></script>
 </body>
 </html>
