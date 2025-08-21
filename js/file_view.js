@@ -128,24 +128,24 @@
         }
 
         // ---- Subcarpetas
-        const children = Array.isArray(node.children) ? node.children : [];
-        if (children.length && folderList) {
-        const frag = document.createDocumentFragment();
-        children.forEach((childKey) => {
-            const a = document.createElement('a');
-            a.className = 'folder-chip';
-            a.href = `file.html?k=${encodeURIComponent(childKey)}&title=${encodeURIComponent(childKey.split('/').slice(-1)[0])}`;
-            a.innerHTML = `
-            <svg class="folder-icon" viewBox="0 0 24 24" aria-hidden="true">
-                <path fill="#F9A41E" d="M10 4l2 2h6a2 2 0 012 2v1H4V6a2 2 0 012-2h4z"/>
-                <path fill="#FFC766" d="M4 9h16a2 2 0 012 2v6a2 2 0 01-2 2H6a2 2 0 01-2-2V9z"/>
-                <path fill="rgba(0,0,0,.08)" d="M4 9h16v1H4z"/>
-            </svg>
-            <strong>${escapeHTML(childKey.split('/').slice(-1)[0])}</strong>`;
-            frag.appendChild(a);
-        });
-        folderList.appendChild(frag);
-        }
+        // const children = Array.isArray(node.children) ? node.children : [];
+        // if (children.length && folderList) {
+        // const frag = document.createDocumentFragment();
+        // children.forEach((childKey) => {
+        //     const a = document.createElement('a');
+        //     a.className = 'folder-chip';
+        //     a.href = `file.html?k=${encodeURIComponent(childKey)}&title=${encodeURIComponent(childKey.split('/').slice(-1)[0])}`;
+        //     a.innerHTML = `
+        //     <svg class="folder-icon" viewBox="0 0 24 24" aria-hidden="true">
+        //         <path fill="#F9A41E" d="M10 4l2 2h6a2 2 0 012 2v1H4V6a2 2 0 012-2h4z"/>
+        //         <path fill="#FFC766" d="M4 9h16a2 2 0 012 2v6a2 2 0 01-2 2H6a2 2 0 01-2-2V9z"/>
+        //         <path fill="rgba(0,0,0,.08)" d="M4 9h16v1H4z"/>
+        //     </svg>
+        //     <strong>${escapeHTML(childKey.split('/').slice(-1)[0])}</strong>`;
+        //     frag.appendChild(a);
+        // });
+        // folderList.appendChild(frag);
+        // }
 
         // ---- Archivos
         const files = Array.isArray(node.files) ? node.files : [];
