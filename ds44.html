@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Decreto Supremo N°44</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+        /* Tweak visual mínimo para el índice */
+        .toc { list-style: none; padding-left: 0; margin: 0; }
+        .toc > li { margin: 10px 0 14px; }
+        .toc a { color: var(--text); text-decoration: none; }
+        .toc a:hover { text-decoration: underline; }
+        .toc .children { margin-top: 8px; padding-left: 14px; border-left: 3px solid var(--border); }
+        .section-card{
+        background: var(--panel); border:1px solid var(--border); border-radius:12px;
+        padding:12px; margin:12px 0;
+        }
+        .section-card h3{ margin: 0 0 6px; font-size: 16px; }
+        .file-link { display:inline-block; margin: 2px 0; }
+    </style>
+    </head>
+    <body>
+
+    <!-- ======= BARRA DE MARCA ======= -->
+    <header class="brandbar" role="banner">
+        <div class="brandbar__inner container">
+        <div class="brandbar__left">
+            <img src="static/img/logo_cencosud.png" alt="Cencosud" class="brand-logo brand-logo--cenco" />
+        </div>
+        <div class="brandbar__title">
+            <h1>Decreto Supremo N°44</h1>
+            <p class="brandbar__subtitle">Índice y navegación por secciones</p>
+        </div>
+        <div class="brandbar__right">
+            <img src="static/img/logo_ist.png" alt="IST" class="brand-logo brand-logo--ist" />
+        </div>
+        </div>
+    </header>
+
+    <!-- ======= NAVBAR SUPERIOR (tu menú general) ======= -->
+    <nav class="subnav" aria-label="Sitio">
+        <div class="container">
+        <ul class="toc">
+            <li><a href="index.html">Matriz de Riesgo</a></li>
+            <li><strong>Decreto Supremo N°44</strong></li>
+        </ul>
+        </div>
+    </nav>
+
+    <!-- ======= CONTENIDO: ÍNDICE DS44 ======= -->
+    <main class="container">
+        <section class="panel divider">
+        <h2 class="panel-title">Índice — Decreto Supremo N°44</h2>
+        <p class="muted small">Selecciona una sección para ver sus archivos. Las páginas abren en <code>file.html</code>.</p>
+        </section>
+
+        <section class="panel">
+        <div id="ds44-toc"></div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container"><small>DS 44 · Cencosud & IST</small></div>
+    </footer>
+
+    <script src="menu.js" defer></script>
+    <script src="ds44_index.js" defer></script>
+</body>
+</html>

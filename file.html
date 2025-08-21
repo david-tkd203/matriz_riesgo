@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Decreto Supremo N°44 — Archivos</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+        .file-list { display:grid; gap: 10px; }
+        .file-card{
+        display:flex; align-items:flex-start; justify-content:space-between; gap:12px;
+        background: var(--panel); border:1px solid var(--border); border-radius:12px;
+        padding:12px;
+        }
+        .file-title{ margin:0 0 6px; font-size:15px; }
+        .file-desc{ margin:0; color: var(--muted); font-size:13px; }
+        .file-cta .btn { white-space: nowrap; }
+        .crumbs a { color: var(--accent); text-decoration: none; }
+        .crumbs a:hover{ text-decoration: underline; }
+    </style>
+    </head>
+    <body>
+
+    <!-- ======= BARRA DE MARCA ======= -->
+    <header class="brandbar" role="banner">
+        <div class="brandbar__inner container">
+        <div class="brandbar__left">
+            <img src="static/img/logo_cencosud.png" alt="Cencosud" class="brand-logo brand-logo--cenco" />
+        </div>
+        <div class="brandbar__title">
+            <h1 id="page-title">Decreto Supremo N°44</h1>
+            <p class="brandbar__subtitle" id="page-subtitle">Archivos y documentos</p>
+        </div>
+        <div class="brandbar__right">
+            <img src="static/img/logo_ist.png" alt="IST" class="brand-logo brand-logo--ist" />
+        </div>
+        </div>
+    </header>
+
+    <!-- ======= NAVBAR SUPERIOR (volver al índice) ======= -->
+    <nav class="subnav" aria-label="Navegación secundaria">
+        <div class="container">
+        <ul class="toc">
+            <li><a href="ds44.html">← Volver al índice DS44</a></li>
+        </ul>
+        </div>
+    </nav>
+
+    <!-- ======= CONTENIDO ======= -->
+    <main class="container">
+        <section class="panel">
+        <h2 class="panel-title" id="section-title">Decreto Supremo N°44 — Documentos</h2>
+
+        <p id="breadcrumbs" class="muted small crumbs"></p>
+        <p id="page-desc" class="muted"></p>
+        <p id="page-note" class="small" style="display:none"></p>
+
+        <div id="file-list" class="file-list"></div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container"><small>DS 44 · Cencosud & IST</small></div>
+    </footer>
+
+    <script src="menu.js" defer></script>
+    <script src="file_view.js" defer></script>
+</body>
+</html>
