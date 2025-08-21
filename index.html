@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Matriz de Riesgo</title>
+
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- Librería XLSX -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" defer></script>
+
+    <!-- Vista en tabla (tu script) -->
+    <script src="script.js" defer></script>
+
+    <!-- Vista de tarjetas D→R (aislada para no chocar con script.js) -->
+    <script src="vista_previa.js" defer></script>
+</head>
+    <body>
+
+    <!-- ======= BARRA DE MARCA (logos) ======= -->
+    <header class="brandbar" role="banner">
+        <div class="brandbar__inner container">
+        <div class="brandbar__left">
+            <img src="static/img/logo_cencosud.png" alt="Cencosud" class="brand-logo brand-logo--cenco" />
+        </div>
+
+        <div class="brandbar__title">
+            <h1>Matriz de Riesgo</h1>
+            <p class="brandbar__subtitle">Visualización y revalorización de riesgos</p>
+        </div>
+
+        <div class="brandbar__right">
+            <img src="static/img/logo_ist.png" alt="IST" class="brand-logo brand-logo--ist" />
+        </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- ======== VISTA 2: TARJETAS D→R ======== -->
+        <section class="panel divider">
+        <h2 class="panel-title">Vista de Tarjetas (col. D → R)</h2>
+        <p class="muted small">
+            Muestra Peligros, Riesgos, Probabilidad (P/C), Valorización, Revalorización, Medidas de Control, Responsabilidad y Frecuencia.
+        </p>
+        </section>
+
+        <section class="panel">
+        <div class="filters">
+            <label class="field" for="vp-filter-input">
+            <span>Buscar hoja</span>
+            <input id="vp-filter-input" type="text" placeholder="Escribe parte del nombre…" autocomplete="off" />
+            </label>
+        </div>
+        <div id="vp-status" class="status" aria-live="polite">Cargando…</div>
+        </section>
+
+        <section class="panel">
+        <h3 class="panel-title">Áreas Disponibles</h3>
+        <div id="vp-sheets" class="sheets" aria-live="polite"></div>
+        </section>
+
+        <section class="panel">
+        <h3 class="panel-title">Filtros (tarjetas)</h3>
+        <div class="filters">
+            <label class="field" for="vp-process-filter">
+            <span>Procesos (B)</span>
+            <select id="vp-process-filter" disabled>
+                <option value="__ALL__">— Todas —</option>
+            </select>
+            </label>
+
+            <label class="field" for="vp-activity-filter">
+            <span>Actividad / Infraestructura (C)</span>
+            <select id="vp-activity-filter" disabled>
+                <option value="__ALL__">— Todas —</option>
+            </select>
+            </label>
+
+            <!-- NUEVO: filtro de Riesgos -->
+            <label class="field" for="vp-risk-filter">
+            <span>Riesgos</span>
+            <select id="vp-risk-filter" disabled>
+                <option value="__ALL__">— Todos —</option>
+            </select>
+            </label>
+
+            <button id="vp-clear" class="btn" type="button" disabled>Limpiar filtros</button>
+        </div>
+        </section>
+
+        <section class="panel">
+        <h3 class="panel-title">Resultados de Riesgos</h3>
+        <div id="vp-cards" class="cards"></div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+        <small>Funciona con SheetJS · Tabla + Tarjetas · Lectura por A1 (encabezados fila 10/11, datos desde fila 12).</small>
+        </div>
+    </footer>
+</body>
+</html>

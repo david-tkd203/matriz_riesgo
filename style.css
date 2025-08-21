@@ -1,0 +1,316 @@
+/* =========================
+   Paleta Cencosud (claro)
+   ========================= */
+:root{
+    /* Marca */
+    --cenco-blue:   #007CC1;
+    --cenco-blue-2: #006AA7;   /* hover/active */
+    --cenco-orange: #F9A41E;
+
+    /* Superficies claras */
+    --bg:    #ffffff;
+    --panel: #ffffff;
+
+    /* Texto y estados */
+    --text:  #0a2130;
+    --muted: #6a8899;
+
+    /* Contornos y rellenos suaves */
+    --border:     #d7e6f2;
+    --pill:       #f5faff;
+    --pill-hover: #ecf6fd;
+
+    /* Tablas / bloques */
+    --table-head: #e8f4fb;
+    --chip:       #eef7fd;
+
+    /* Acentos */
+    --accent:   var(--cenco-blue);
+    --accent-2: var(--cenco-orange);
+
+    /* Colores de categorías de riesgo (según matriz) */
+    --risk-low-bg:    #e7f7ee;
+    --risk-low-fg:    #0f5132;
+    --risk-low-br:    #7ad6a5;
+
+    --risk-med-bg:    #fff8d6;
+    --risk-med-fg:    #664d03;
+    --risk-med-br:    #ffe066;
+
+    --risk-high-bg:   #ffe3e3;
+    --risk-high-fg:   #842029;
+    --risk-high-br:   #ffa0a0;
+}
+
+/* Reset mínimo */
+*{ box-sizing: border-box; }
+html,body{ height:100%; }
+body{
+    margin:0;
+    font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    color: var(--text);
+    background: var(--bg);
+}
+
+/* Layout base */
+.container{ width:100%; max-width:1100px; padding:16px; margin:0 auto; }
+
+/* (Si usas cabecera) */
+.topbar{
+    background: linear-gradient(180deg, rgba(0,124,193,.08), transparent 60%);
+    border-bottom: 1px solid var(--border);
+}
+.title{ margin:12px 0 4px; font-size:28px; letter-spacing:.2px; }
+.subtitle{ margin:0 0 8px; color:var(--muted); font-size:14px; }
+
+/* Panel */
+.panel{
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 16px;
+    margin: 14px 0;
+    box-shadow: 0 6px 18px rgba(0,33,48,.06);
+}
+.panel-title{ margin:0 0 10px; font-size:18px; color: var(--text); }
+
+/* Controles / filtros */
+.filters{ display:flex; flex-wrap:wrap; gap:12px 16px; align-items:center; }
+.field{ display:grid; gap:6px; min-width:260px; }
+.field span{ font-size:12px; color:var(--muted); }
+
+.field input[type="text"],
+.field select{
+    background: var(--pill);
+    border:1px solid var(--border);
+    color: var(--text);
+    padding:10px 12px;
+    border-radius:10px;
+    outline:none;
+}
+.field input[type="text"]::placeholder{ color:#99b7c9; }
+.field input[type="text"]:focus,
+.field select:focus{
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(0,124,193,.18);
+}
+
+/* Botón primario */
+.btn{
+    background: var(--accent);
+    color:#ffffff;
+    border:0;
+    padding:10px 14px;
+    border-radius:10px;
+    cursor:pointer;
+    transition: background .15s ease, transform .06s ease, box-shadow .15s ease;
+    box-shadow: 0 3px 0 rgba(0,0,0,.08);
+}
+.btn:hover{ background: var(--cenco-blue-2); transform: translateY(-1px); }
+.btn[disabled]{ opacity:.6; cursor:not-allowed; }
+
+/* Estado / texto auxiliar */
+.status{ margin-top:10px; color:var(--muted); font-size:14px; }
+.muted{ color:var(--muted); }
+.small{ font-size:12px; }
+
+/* Hojas */
+.sheets{ display:flex; flex-wrap:wrap; gap:10px; }
+.sheet-pill{
+    appearance:none;
+    background: var(--pill);
+    color: var(--text);
+    border:1px solid var(--border);
+    padding:10px 14px;
+    border-radius:999px;
+    font-size:14px;
+    cursor:pointer;
+    user-select:none;
+    transition: transform .06s ease, background .15s ease, border .15s ease, color .15s ease;
+}
+.sheet-pill:hover, .sheet-pill:focus{
+    background: var(--pill-hover);
+    border-color: var(--accent);
+    color: #063754;
+    transform: translateY(-1px);
+}
+.sheet-pill:focus{ outline:2px solid rgba(0,124,193,.35); }
+.sheet-pill[disabled]{ opacity:.5; cursor:not-allowed; }
+
+/* Tabla previa (si se usa) */
+.preview{
+    width:100%;
+    max-height:65vh;
+    overflow:auto;
+    border:1px solid var(--border);
+    border-radius:10px;
+    background:#fff;
+    padding:8px;
+}
+.preview table{ border-collapse:collapse; width:100%; font-size:14px; background:#fff; }
+.preview th, .preview td{
+    border:1px solid var(--border);
+    padding:6px 8px;
+    white-space:nowrap;
+    color: var(--text);
+}
+.preview th{
+    background: var(--table-head);
+    position: sticky; top:0;
+    color:#0a2130;
+}
+
+/* Footer */
+.footer{
+    text-align:center;
+    padding:20px 0 40px;
+    color:var(--muted);
+    font-size:13px;
+    border-top:1px solid var(--border);
+    margin-top:24px;
+}
+.footer a{ color:var(--accent); text-decoration:none; }
+.footer a:hover{ text-decoration:underline; }
+
+/* Separador entre vistas */
+.divider{ border-left:6px solid var(--accent-2); }
+
+/* ===== Vista de TARJETAS (D → R) ===== */
+.cards{ display:grid; grid-template-columns:repeat(12,1fr); gap:14px; }
+.risk-card{
+    grid-column: span 12;
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:16px;
+    display:grid; gap:10px;
+}
+@media (min-width:860px){ .risk-card{ grid-column: span 6; } }
+
+.rc-top{ display:flex; flex-wrap:wrap; gap:8px; align-items:center; }
+.chip{
+    background: var(--chip);
+    border:1px solid #c6e0ef;
+    color:#063754;
+    padding:6px 10px;
+    border-radius:999px;
+    font-size:12px;
+}
+.chip-flag{   background: #fff6e6; color:#7a4b00; border-color:#ffd18a; }
+.chip-person{ background: #e9f6ff; color:#00476d; border-color:#badef1; }
+.chip-proc{   background: #e9f6ff; color:#00476d; border-color:#badef1; }
+.chip-act{    background: #fff6e6; color:#7a4b00; border-color:#ffd18a; }
+
+.rc-section{
+    background:#f7fbfe;
+    border:1px dashed #c9e3f3;
+    border-radius:12px;
+    padding:12px;
+}
+.rc-grid{ display:grid; grid-template-columns:1fr; gap:10px; }
+@media (min-width:640px){ .rc-grid{ grid-template-columns:1fr 1fr; } }
+.rc-title{ font-size:13px; color:#41667a; margin-bottom:6px; }
+.rc-value{ font-size:14px; color:var(--text); white-space:pre-wrap; }
+
+/* Métricas Probabilidad / VR */
+.metrics{ display:grid; grid-template-columns:repeat(12,1fr); gap:10px; }
+.metric{
+    grid-column: span 12;
+    background:#f7fbfe;
+    border:1px solid #c9e3f3;
+    border-radius:12px;
+    padding:10px;
+}
+@media (min-width:640px){ .metric{ grid-column: span 6; } }
+.metric h4{ margin:0 0 8px; font-size:14px; color:#0a2130; }
+.metric .badges{ display:flex; gap:6px; flex-wrap:wrap; }
+.badge{
+    display:inline-block;
+    padding:4px 8px;
+    border-radius:8px;
+    border:1px solid #c6e0ef;
+    font-size:12px;
+    background:#eaf6ff;
+    color:#063754;
+}
+
+/* Valorización/Revalorización con categorías */
+.score{
+    margin-top:6px;
+    display:inline-block;
+    padding:6px 10px;
+    border-radius:10px;
+    font-weight:600;
+    font-size:13px;
+    border:1px solid var(--border);
+    background:#fff;
+    color:var(--text);
+}
+.score--low{
+    background: var(--risk-low-bg);
+    color: var(--risk-low-fg);
+    border-color: var(--risk-low-br);
+}
+.score--medium{
+    background: var(--risk-med-bg);
+    color: var(--risk-med-fg);
+    border-color: var(--risk-med-br);
+}
+.score--high{
+    background: var(--risk-high-bg);
+    color: var(--risk-high-fg);
+    border-color: var(--risk-high-br);
+}
+
+/* Medidas de control */
+.controls{
+    background:#f7fbfe;
+    border:1px solid #c9e3f3;
+    border-radius:12px;
+    padding:10px;
+}
+.controls ul{ margin:6px 0 0; padding-left:18px; }
+.controls li{ margin:4px 0; }
+/* ======= Barra de marca (logos y título) ======= */
+.brandbar{
+    background: #fff;
+    border-bottom: 1px solid var(--border);
+}
+.brandbar__inner{
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 12px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.brand-logo{
+    display:block;
+    height: 40px;            /* móvil */
+    width: auto;
+    object-fit: contain;
+}
+.brand-logo--cenco{ height: 44px; }
+.brand-logo--ist{ height: 40px; }
+
+.brandbar__title{
+    text-align: center;
+}
+.brandbar__title h1{
+    margin: 0;
+    font-size: 22px;
+    line-height: 1.2;
+    color: var(--text);
+}
+.brandbar__subtitle{
+    margin: 2px 0 0;
+    font-size: 12px;
+    color: var(--muted);
+}
+
+@media (min-width: 768px){
+    .brand-logo{ height: 52px; }
+    .brand-logo--cenco{ height: 56px; }
+    .brandbar__title h1{ font-size: 28px; }
+    .brandbar__subtitle{ font-size: 13px; }
+}
