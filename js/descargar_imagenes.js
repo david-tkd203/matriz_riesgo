@@ -130,20 +130,6 @@
                 actions.appendChild(btn);
             });
 
-            // Crear botón "Descargar tarjeta" si falta
-            if (!actions.querySelector('.dl-card-btn')) {
-            const b1 = document.createElement('button');
-            b1.type = 'button';
-            b1.className = 'dl-card-btn';
-            b1.textContent = 'Descargar tarjeta';
-            b1.addEventListener('click', async (e) => {
-                e.stopPropagation();
-                await ensureHtml2Canvas();
-                await downloadCard(card, makeFilename(card, i + 1, 'tarjeta'), 'card');
-            });
-            actions.appendChild(b1);
-            }
-
             // Crear botón "Descargar informe" si falta
             if (!actions.querySelector('.dl-report-btn')) {
             const b2 = document.createElement('button');
